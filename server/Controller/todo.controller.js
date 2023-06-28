@@ -27,6 +27,9 @@ const createTodo = async (req, res) => {
         message: "Please provide the title of the todo",
       });
     }
+    const newTodo = new TodoModel(payload);
+    await newTodo.save();
+    res.status(200).send(newTodo);
   } catch (error) {
     res.status(500).send({ message: error.message });
   }

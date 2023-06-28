@@ -16,9 +16,9 @@ TodoRouter.get("/searchtodo", searchTodo);
 TodoRouter.post("/createtodo", createTodo);
 
 // Endpoint to delete a todo
-TodoRouter.delete("/deletetodo", deleteTodo);
+TodoRouter.delete("/deletetodo/:id", deleteTodo);
 
 // Endpoint to update a todo
-TodoRouter.patch("/updateTodo", updateTodo);
+TodoRouter.patch("/updateTodo/:id", updateTodo);
 
 module.exports = { TodoRouter };

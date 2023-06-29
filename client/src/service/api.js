@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BaseURL = "http://localhost:9090";
+const BaseURL = `https://todo-backend-6n0l.onrender.com`;
 export const createTodo = async (data) => {
   try {
     const response = await axios.post(`${BaseURL}/createtodo`, data);
@@ -17,7 +17,7 @@ export const createTodo = async (data) => {
 export const getTodos = async () => {
   try {
     const response = await axios.get(`${BaseURL}/gettodo`);
-    if (response.statusText === "OK") {
+    if (response.status === 200) {
       return response.data;
     }
   } catch (error) {

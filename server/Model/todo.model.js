@@ -8,13 +8,4 @@ const todoSchema = mongoose.Schema({
 // Create the todo model using the schema
 const TodoModel = mongoose.model("todo", todoSchema);
 
-// Create the index
-TodoModel.collection.createIndex({ title: "text" }, (error) => {
-  if (error) {
-    console.error("Error creating index:", error);
-  } else {
-    console.log("Index created successfully");
-  }
-});
-
 module.exports = { TodoModel };

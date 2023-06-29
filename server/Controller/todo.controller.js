@@ -1,8 +1,21 @@
 const { TodoModel } = require("../Model/todo.model");
+// import { createClient } from 'redis';
+const { createClient } = require("redis");
+
+const client = createClient({
+  password: "h0fYhTbhtJ4a18LVvJehIzjAZq3LmJB2",
+  socket: {
+    host: "redis-11137.c98.us-east-1-4.ec2.cloud.redislabs.com",
+    port: 11137,
+  },
+});
+client.connect();
 const getTodo = async (req, res) => {
   try {
-    const todos = await TodoModel.find({});
-    res.status(200).send(todos);
+    // const todos = await TodoModel.find({});
+    const todos = await client.LRANGE("todoos", 0, -1);
+    const alltodos = todos.map(JSON.parse);
+    res.status(200).send(alltodos);
   } catch (error) {
     res.status(500).send({ message: error.message });
   }
@@ -10,10 +23,13 @@ const getTodo = async (req, res) => {
 const searchTodo = async (req, res) => {
   const query = req.query.q;
   try {
-    const result = await TodoModel.find({
-      $text: { $search: query, $caseSensitive: false },
+    const results = await TodoModel.find({
+      $or: [
+        { title: { $regex: query, $options: "i" } },
+        { description: { $regex: query, $options: "i" } },
+      ],
     });
-    res.status(200).send(result);
+    res.status(200).send(results);
   } catch (error) {
     res.status(500).send({ message: error.message });
   }
@@ -29,6 +45,8 @@ const createTodo = async (req, res) => {
     }
     const newTodo = new TodoModel(payload);
     await newTodo.save();
+    // Save the task to Redis
+    await client.RPUSH("todoos", JSON.stringify(newTodo));
     res.status(200).send(newTodo);
   } catch (error) {
     res.status(500).send({ message: error.message });
@@ -55,6 +73,7 @@ const deleteTodo = async (req, res) => {
       res.status(400).send({ message: "Please provied id" });
     }
     await TodoModel.findByIdAndDelete({ _id: id });
+    await client.LREM("todoos", 0, id);
     res.status(204).send({ message: "Todo updated successfully" });
   } catch (error) {
     res.status(500).send({ message: error.message });

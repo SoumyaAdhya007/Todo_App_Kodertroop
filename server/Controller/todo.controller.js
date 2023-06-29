@@ -1,11 +1,11 @@
 const { TodoModel } = require("../Model/todo.model");
-// import { createClient } from 'redis';
+require("dotenv").config();
 const { createClient } = require("redis");
 
 const client = createClient({
-  password: "h0fYhTbhtJ4a18LVvJehIzjAZq3LmJB2",
+  password: process.env.RedisPass,
   socket: {
-    host: "redis-11137.c98.us-east-1-4.ec2.cloud.redislabs.com",
+    host: process.env.RedisHost,
     port: 11137,
   },
 });

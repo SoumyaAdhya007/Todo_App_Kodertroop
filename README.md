@@ -1,4 +1,5 @@
 # Todo App
+![Screenshot 2023-06-29 162206](https://github.com/SoumyaAdhya007/Todo_App_Kodertroop/assets/112754567/7da082e2-eb3d-4db9-a0d5-08b455d312ac)
 
 **Server:** `Node`, `Express` , `MongoDB Atlas` , `Redis `
 

@@ -32,14 +32,7 @@ export const deleteTodo = async (id) => {
     console.log("Error while deleteTodo API", error.message);
   }
 };
-export const updateTodo = async (id, data) => {
-  try {
-    const response = await axios.patch(`${BaseURL}/updateTodo/${id}`, data);
-    return response;
-  } catch (error) {
-    console.log("Error while updateTodo API", error.message);
-  }
-};
+
 export const searchTodo = async (query) => {
   try {
     const response = await axios.get(`${BaseURL}/searchtodo?q=${query}`);

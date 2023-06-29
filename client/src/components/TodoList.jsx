@@ -9,15 +9,12 @@ import {
   TableCell,
   TableBody,
   Paper,
-  Typography,
   IconButton,
   InputBase,
 } from "@mui/material";
 import { Search as SearchIcon } from "@mui/icons-material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import EditNoteIcon from "@mui/icons-material/EditNote";
-import SaveIcon from "@mui/icons-material/Save";
-import { getTodos, deleteTodo, updateTodo, searchTodo } from "../service/api";
+import { getTodos, deleteTodo, searchTodo } from "../service/api";
 const TodoListBox = styled(Box)`
   width: 68%;
   margin: 0;
@@ -61,6 +58,7 @@ const InputField = styled(InputBase)`
   height: 15px;
   color: #1c2130;
 `;
+
 const TodoList = ({ value }) => {
   const [allTodos, setAllTodos] = useState([]);
   const [searchText, setSearchText] = useState("");
@@ -105,7 +103,6 @@ const TodoList = ({ value }) => {
               <TodoHeadeCell>SL</TodoHeadeCell>
               <TodoHeadeCell>Title</TodoHeadeCell>
               <TodoHeadeCell>Description</TodoHeadeCell>
-              <TodoHeadeCell align="right">Update</TodoHeadeCell>
               <TodoHeadeCell align="right">Delete</TodoHeadeCell>
             </TableRow>
           </TodoTableHead>
@@ -120,12 +117,7 @@ const TodoList = ({ value }) => {
                 </TableCell>
                 <TableCell>{row.title}</TableCell>
                 <TableCell>
-                  {row.description ? row.description : "Add description"}
-                </TableCell>
-                <TableCell align="right">
-                  <IconButton aria-label="edit" size="large">
-                    <EditNoteIcon fontSize="large" />
-                  </IconButton>
+                  {row.description ? row.description : "No description"}
                 </TableCell>
                 <TableCell align="right">
                   <IconButton

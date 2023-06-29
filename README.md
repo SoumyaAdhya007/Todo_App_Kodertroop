@@ -4,7 +4,9 @@
 **Server:** `Node`, `Express` , `MongoDB Atlas` , `Redis `
 
 **Client:** `React`, `Material UI `
-
+## Deploy Link
+``` Frontend ``` : [https://todo-app-kodertroop.netlify.app/](https://todo-app-kodertroop.netlify.app/) 
+``` Backend ``` : [https://todo-backend-6n0l.onrender.com](https://todo-backend-6n0l.onrender.com) 
 ## Features
 
 - Create Todo
